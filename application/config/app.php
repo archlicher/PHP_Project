@@ -1,5 +1,6 @@
 <?php
 
-$cnf['test1'] = 'OK';
-$cnf['test2'] = 'OK2';
+$cnf['default_controller'] = 'Index';
+$cnf['default_method'] = 'index';
+$cnf['namespaces']['Controllers'] = 'C:/xampp/htdocs/php_project/application/controllers/';
 return $cnf;

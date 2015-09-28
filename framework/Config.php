@@ -65,7 +65,7 @@ class Config {
 			$basename = explode('.php', basename($file))[0];
 			$this->configArray[$basename] = include $file;
 		} else {
-			throw new \Exception("Confif file read error: ".$path);
+			throw new \Exception("Config file read error: ".$path);
 		}
 	}
 }
