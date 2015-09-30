@@ -2,7 +2,7 @@
 
 namespace Controllers\Admin;
 
-class Index {
+class Index extends \Framework\DefaultController {
 	
 	public function Index()	{
 		echo "Yes -> Admin Index";

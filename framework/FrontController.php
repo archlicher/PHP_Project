@@ -51,11 +51,14 @@ class FrontController {
 			throw new \Exception("Default routes missing", 500);
 		}
 
+		$input = \Framework\InputData::getInstance();
 		$params = explode('/', $uri);
 		if ($params[0]) {
 			$this->controller = strtolower($params[0]);
 			if ($params[1]) {
 				$this->method = strtolower($params[1]);
+				unset($params[0], $params[1]);
+				$input->setGet(array_values($params));
 			} else {
 				$this->method = $this->getDefaultMethod();
 			}
@@ -71,6 +74,7 @@ class FrontController {
 				$this->controller=strtolower($rc['controllers'][$this->controller]['to']);
 			}
 		}
+		$input->setPost($this->router->getPost());
 
 		$controllerClass = $this->ns.'\\'.ucfirst($this->controller);
 		$newController = new $controllerClass();

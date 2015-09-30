@@ -11,8 +11,10 @@ class App {
 	private $frontController = null;
 	private $router = null;
 	private $dbConnections = array();
+	private $session = null;
 
 	private function __construct() {
+		set_exception_handler(array($this, 'exceptionHandler'));
 		\Framework\Loader::registerNamespace('Framework', dirname(__FILE__).DIRECTORY_SEPARATOR);
 		\Framework\Loader::registerAutoLoad();
 		$this->config = \Framework\Config::getInstance();
@@ -52,14 +54,33 @@ class App {
 		$this->frontController = \Framework\FrontController::getInstance();
 		if ($this->router instanceof \Framework\Routers\IRouter) {
 			$this->frontController->setRouter($this->router);
-		} else if ($this->router == 'JsonRPCRouter') {
-			$this->frontController->setRouter(new \Framework\Routers\DefaultRouter());
-		} else if ($this->router == 'CLIRouter') {
-			$this->frontController->setRouter(new \Framework\Routers\DefaultRouter());
+		} else if ($this->router == 'JsonRpcRouter') {
+			$this->frontController->setRouter(new \Framework\Routers\JsonRpcRouter());
 		} else {
 			$this->frontController->setRouter(new \Framework\Routers\DefaultRouter());
 		}
+
+		$sess = $this->config->app['session'];
+		if ($sess['autostart']) {
+			if ($sess['type'] == 'native') {
+				$s = new \Framework\Session\NativeSession($sess['name'], $sess['lifetime'], $sess['path'], $sess['domain'], $sess['secure']);
+			} else if ($sess['type'] = 'database') {
+				$s = new \Framework\Session\NativeSession($sess['dbConnection'], $sess['name'], $sess['dbTable'], $sess['lifetime'], $sess['path'], $sess['domain'], $sess['secure']); 
+			} else {
+				throw new \Exception("No valid session", 500);
+			}
+			$this->setSession($s);
+		}
+
 		$this->frontController->dispatch();
+	}
+
+	/**
+	 * 
+	 * @return \Framework\Session\ISession
+	 */
+	public function getSession() {
+		return $this->session;
 	}
 
 	public function getDBConnection($connection = 'default') {
@@ -89,5 +110,30 @@ class App {
 		}
 
 		return self::$instance;
+	}
+
+	public function exceptionHandler(\Exception $ex) {
+		if ($this->config && $this->config->app['displayExceptions'] == true) {
+			echo '<pre>' . print_r($ex, true). '</pre>';
+		} else {
+			$this->displayError($ex->getCode());
+		}
+	}
+
+	public function displayError($code) {
+		try {
+			$view = \Framework\View::getInstance();
+			$view->display('errors.' . $code);
+		} catch (\Exception $exc) {
+			\Framework\Common::headerStatus($code);
+			echo '<h1>' . $error . '</h1>';
+			exit;
+		}
+	}
+
+	public function __destruct() {
+		if ($this->session!=null) {
+			$this->session->saveSession();
+		}
 	}
 }
