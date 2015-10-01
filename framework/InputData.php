@@ -75,7 +75,7 @@ class InputData {
 	*/
 	public static function getInstance(){
 		if (self::$instance==null) {
-			self::$instance = new \AR\InputData();
+			self::$instance = new \Framework\InputData();
 		}
 
 		return self::$instance;

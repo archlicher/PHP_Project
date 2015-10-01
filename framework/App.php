@@ -63,9 +63,9 @@ class App {
 		$sess = $this->config->app['session'];
 		if ($sess['autostart']) {
 			if ($sess['type'] == 'native') {
-				$s = new \Framework\Session\NativeSession($sess['name'], $sess['lifetime'], $sess['path'], $sess['domain'], $sess['secure']);
+				$s = new \Framework\Sessions\NativeSession($sess['name'], $sess['lifetime'], $sess['path'], $sess['domain'], $sess['secure']);
 			} else if ($sess['type'] = 'database') {
-				$s = new \Framework\Session\NativeSession($sess['dbConnection'], $sess['name'], $sess['dbTable'], $sess['lifetime'], $sess['path'], $sess['domain'], $sess['secure']); 
+				$s = new \Framework\Sessions\DBSession($sess['dbConnection'], $sess['name'], $sess['dbTable'], $sess['lifetime'], $sess['path'], $sess['domain'], $sess['secure']); 
 			} else {
 				throw new \Exception("No valid session", 500);
 			}
@@ -81,6 +81,10 @@ class App {
 	 */
 	public function getSession() {
 		return $this->session;
+	}
+
+	public function setSession($session) {
+		$this->session = $session;
 	}
 
 	public function getDBConnection($connection = 'default') {

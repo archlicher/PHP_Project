@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Session;
+namespace Framework\Sessions;
 
-class DBSession extends \Framework\DB\SimpleDB implements \Framework\Session\ISession {
+class DBSession extends \Framework\DB\SimpleDB implements \Framework\Sessions\ISession {
 
 	private $sessionName;
 	private $tableName;

@@ -5,6 +5,7 @@
 	<title>Document</title>
 </head>
 <body>
+	<h1>works</h1>
 	<?= $this->getLayoutData('body');?>
 </body>
 </html>

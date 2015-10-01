@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Session;
+namespace Framework\Sessions;
 
-class NativeSession implements \Framework\ISession {
+class NativeSession implements \Framework\Sessions\ISession {
 	public function __construct($name, $lifetime = 3600, $path = null, $domain = null, $secure = false) {
 		if (strlen($name)<1) {
 			$name = '_sess';
