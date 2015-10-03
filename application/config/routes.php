@@ -25,6 +25,15 @@ $cnf['user']['controllers']['product']['methods']['sell'] = 'sell';
 $cnf['user']['controllers']['product']['methods']['cart'] = 'cart';
 $cnf['user']['controllers']['product']['methods']['order'] = 'order';
 
+$cnf['editor']['namespace'] = 'Controllers\Editor';
+$cnf['editor']['controllers']['index']['to'] = 'index';
+$cnf['editor']['controllers']['index']['methods']['index'] = 'index';
+$cnf['editor']['controllers']['product']['to'] = 'product';
+$cnf['editor']['controllers']['product']['methods']['edit'] = 'edit';
+$cnf['editor']['controllers']['product']['methods']['promo'] = 'promo';
+$cnf['editor']['controllers']['category']['to'] = 'category';
+$cnf['editor']['controllers']['category']['methods']['edit'] = 'edit';
+
 $cnf['controllers']['products']['to'] = 'category';
 $cnf['controllers']['products']['methods'] = 'category';
 

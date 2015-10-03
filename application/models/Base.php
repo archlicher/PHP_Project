@@ -41,7 +41,6 @@ class Base {
 			}
 		}
 		$query .= ')';
-		var_dump($query);
 		$result = $this->db->prepare($query, $values)->execute()->getLastInsertId();
 
 		return $result;

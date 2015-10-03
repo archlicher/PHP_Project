@@ -15,22 +15,17 @@ class Auth extends \Controllers\Base {
 
 			$userDb = new \Models\User();
 			$user = $userDb->getUser($username)[0];
-			if (!$user || $user['password'] != $password) {
+
+			if (!$user || $user['password'] != $password || $user['banned'] == 1) {
 				header('Location: /php_project/application/public/');
+				exit;
 			}
 
 			$_SESSION['userId'] = $user['user_id'];
 			$_SESSION['username'] = $user['username'];
 			$_SESSION[$user['type']] = true;
 			
-			if ($user['type'] == 'admin') {
-
-				header('Location: /php_project/application/public/admin/index');
-			} else if ($user['type'] == 'editor') {
-				header('Location: /php_project/application/public/editor/index');
-			} else {
-				header('Location: /php_project/application/public/user/index');
-			}
+			header('Location: /php_project/application/public/user/index');
 		}
 
 		$this->view->appendToLayout('body', 'login');
@@ -54,16 +49,24 @@ class Auth extends \Controllers\Base {
 			
 			$userDb = new \Models\User();
 			$user = $userDb->add($newUser);
-
-			if (!$user) {
+			if (!is_numeric($user)) {
 				header('Location: /php_project/application/public/');
+				exit;
 			} else {
-				$this->login();
+				$this->loginAfterRegister($user, $newUser['username']);
 			}
 		}
 
 		$this->view->appendToLayout('body', 'register');
 		$this->view->display('layouts.default');
+	}
+
+	private function loginAfterRegister($id, $username) {
+		$_SESSION['userId'] = $id;
+		$_SESSION['username'] = $username;
+		$_SESSION['user'] = true;
+		
+		header('Location: /php_project/application/public/user/index');
 	}
 
 	public function logout() {
