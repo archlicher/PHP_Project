@@ -1,5 +1,5 @@
 <?php 
-$user = $this->___data[0][0];
+$user = $this->___data[0];
 $products = $this->___data[1];
 ?>
 <div id="wrapper">
@@ -45,7 +45,7 @@ $products = $this->___data[1];
 						<td><?= $value['description'];?></td>
 						<td><?= $value['price'];?></td>
 						<td><?= $value['promotion'] != null ? $value['promotion'] : "no promo";?></td>
-						<td><a class="btn" href="/php_project/application/public/user/product/sell/<?= $value['order_id'];?>/<?= $value['product_id'];?>">Sell</a></td>
+						<td><a class="btn" href="/php_project/application/public/user/product/order/<?= $value['order_id'];?>">Order</a></td>
 					</tr>
 			<?php } ?>
 			</table>

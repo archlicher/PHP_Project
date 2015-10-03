@@ -2,24 +2,127 @@
 
 namespace Controllers\User;
 
-class Profile extends \Controllers\Base {
+class Product extends \Controllers\Base {
 
 	private $user = null;
+	private $userDb = null;
 
 	public function buy() {
 		if (!isset($_SESSION['userId'])) {
 			header('Location: /php_project/application/public/');
+			exit;
 		}
+
+		$productDb = new \Models\Product();
+		$product_id = $this->input->get(0);
+		$product = $productDb->get('product_id='.$product_id)[0];
+
+		if (!is_numeric($product_id) || !$product) {
+			header('Location: /php_project/application/public/');
+			exit;
+		}
+
+		$this->getUser();
+
+		if ($this->user['cash'] < $product['price']) {
+			header('Location: /php_project/application/public/');
+			exit;
+		}
+
+		$orderDb = new \Models\Order();
+
+		$newOrder = array();
+		$newOrder['buyer_id'] = $_SESSION['userId'];
+		$newOrder['product_id'] = $product_id;
+		$orderId = $orderDb->add($newOrder);
+
+		$this->userDb->update('user', array('user_id' => $_SESSION['userId'], 'cash' => $this->user['cash']-$product['price']));
+
+		$buyProduct = array();
+		$buyProduct['product_id'] = $product_id;
+		$buyProduct['quantity'] = $product['quantity']-1;
+
+		$productDb->update('product', $buyProduct);
+		header('Location: /php_project/application/public/');
 	}
 
 	public function sell() {
 		if (!isset($_SESSION['userId'])) {
 			header('Location: /php_project/application/public/');
+			exit;
 		}
+
+		$order_id = $this->input->get(0);
+		$product_id = $this->input->get(1);
+
+		$productDb = new \Models\Product();
+		$orderDb = new \Models\Order();
+
+		$order = $orderDb->get('order_id = '.$order_id)[0];
+		$product = $productDb->get('product_id='.$product_id)[0];
+		
+		if (!is_numeric($product_id) || !is_numeric($order_id) || !$product || !$order) {
+			header('Location: /php_project/application/public/');
+			exit;
+		}
+
+		$orderDb->update('order', array('order_id' => $order_id, 'status' => 'deleted'));
+		
+		if ($this->user==null) {
+			$this->getUser();
+		}
+
+		$this->userDb->update('user', array('user_id' => $_SESSION['userId'], 'cash' => $this->user['cash']+$product['price']));
+
+		$sellProduct['product_id'] = $product_id;
+		$sellProduct['quantity'] = $product['quantity']+1;
+
+		$productDb->update('product', $sellProduct);
+
+		header('Location: /php_project/application/public/user/profile');
+	}
+
+	public function cart() {
+		if (!isset($_SESSION['userId'])) {
+			header('Location: /php_project/application/public/');
+			exit;
+		}
+
+		$this->getUser();
+
+		$productDb = new \Models\Product();
+		$userProducts = $productDb->getOrderedProducts($_SESSION['userId']);
+
+		$data = array();
+		$data[] = $this->user;
+		$data[] = $userProducts;
+
+		$this->view->appendToLayout('body', 'myCart');
+		$this->view->display('layouts.default', $data);
+	}
+
+	public function order() {
+		if (!isset($_SESSION['userId'])) {
+			header('Location: /php_project/application/public/');
+			exit;
+		}
+
+		$order_id = $this->input->get(0);
+		$orderDb = new \Models\Order();
+		$order = $orderDb->get('order_id = '.$order_id)[0];
+
+		if (!is_numeric($order_id) || !$order) {
+			header('Location: /php_project/application/public/');
+			exit;
+		}
+
+		$orderDb->update('order', array('order_id' => $order_id, 'status' => 'closed'));
+
+		header('Location: /php_project/application/public/user/product/cart');
 	}
 
 	private function getUser() {
-		$userDb = new \Models\User();
-		$this->user = $userDb->get('user_id = '.$_SESSION['userId']);
+		$this->userDb = new \Models\User();
+		$this->user = $this->userDb->get('user_id = '.$_SESSION['userId'])[0];
 	}
 }

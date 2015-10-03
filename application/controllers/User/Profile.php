@@ -9,6 +9,7 @@ class Profile extends \Controllers\Base {
 	public function index()	{
 		if(!isset($_SESSION['userId'])) {
 			header('Location: /php_project/application/public/');
+			exit;
 		}
 
 		$this->getUser();
@@ -27,6 +28,7 @@ class Profile extends \Controllers\Base {
 	public function edit() {
 		if(!isset($_SESSION['userId'])) {
 			header('Location: /php_project/application/public/');
+			exit;
 		}
 
 		if ($this->user==null) {
@@ -39,6 +41,7 @@ class Profile extends \Controllers\Base {
 			$email = $_POST['email'];
 			if ($password != $cPassword) {
 				header('Location: /php_project/application/public/user/profile');
+				exit;
 			}
 
 			$cleaner = new \Framework\Common();
@@ -59,6 +62,7 @@ class Profile extends \Controllers\Base {
 	public function cash() {
 		if(!isset($_SESSION['userId'])) {
 			header('Location: /php_project/application/public/');
+			exit;
 		}
 
 		if ($this->user==null) {

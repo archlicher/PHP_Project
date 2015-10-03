@@ -14,8 +14,7 @@
 			<?php 
 			if (!empty($_SESSION['userId'])) {?>
 				<li><a href="/php_project/application/public/user/profile">Profile</a></li>
-				<li><a href="/php_project/application/public/user/orders">My cart</a></li>
-				<li><a href="/php_project/application/public/user/products">My products</a></li>
+				<li><a href="/php_project/application/public/user/product/cart">My cart</a></li>
 				<?php if($_SESSION['editor']) {?>
 				<li><a href="/php_project/application/public/editor/edit">Editor</a></li>
 				<?php } 

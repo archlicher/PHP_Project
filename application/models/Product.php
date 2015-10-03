@@ -9,13 +9,19 @@ class Product extends \Models\Base {
 	}
 
 	public function getByCategory($id) {
-		$query = "SELECT * FROM {$this->table} p JOIN products_categories pc ON pc.product_id = p.product_id WHERE pc.category_id = ?";
+		$query = "SELECT * FROM {$this->table} p JOIN products_categories pc ON pc.product_id = p.product_id WHERE pc.category_id = ? AND quantity > 0";
 		$this->db->prepare($query, array($id));
 		return $this->db->execute()->fetchAllAssoc();
 	}
 
 	public function getProductsByBuyer($id) {
-		$query = "SELECT * FROM {$this->table} p JOIN orders o ON o.buyer_id = p.user_id WHERE p.user_id = ? AND o.status = 'closed'";
+		$query = "SELECT *, o.order_id AS 'order_id' FROM {$this->table} p JOIN orders o ON o.product_id = p.product_id WHERE o.buyer_id = ? AND o.status = 'closed'";
+		$this->db->prepare($query, array($id));
+		return $this->db->execute()->fetchAllAssoc();
+	}
+
+	public function getOrderedProducts($id) {
+		$query = "SELECT *, o.order_id AS 'order_id' FROM {$this->table} p JOIN orders o ON o.product_id = p.product_id WHERE o.buyer_id = ? AND o.status = 'open'";
 		$this->db->prepare($query, array($id));
 		return $this->db->execute()->fetchAllAssoc();
 	}

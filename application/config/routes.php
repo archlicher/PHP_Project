@@ -22,6 +22,8 @@ $cnf['user']['controllers']['profile']['methods']['cash'] = 'cash';
 $cnf['user']['controllers']['product']['to'] = 'product';
 $cnf['user']['controllers']['product']['methods']['buy'] = 'buy';
 $cnf['user']['controllers']['product']['methods']['sell'] = 'sell';
+$cnf['user']['controllers']['product']['methods']['cart'] = 'cart';
+$cnf['user']['controllers']['product']['methods']['order'] = 'order';
 
 $cnf['controllers']['products']['to'] = 'category';
 $cnf['controllers']['products']['methods'] = 'category';

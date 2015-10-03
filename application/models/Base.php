@@ -49,7 +49,10 @@ class Base {
 
 	public function update($class, $element) {
 		$id = $class.'_id';
-		if (!isset($element[$id]));
+		if (!isset($element[$id])) {
+			header('Location: /php_project/application/public/');
+			exit;
+		}
 
 		$query = "UPDATE {$this->table} SET";
 		$values = array();

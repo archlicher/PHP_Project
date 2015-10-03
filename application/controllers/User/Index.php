@@ -7,6 +7,7 @@ class Index extends \Controllers\Base {
 	public function index() {		
 		if (!isset($_SESSION['userId'])) {
 			header('Location: /php_project/application/public/');
+			exit;
 		}
 		$categories = new \Models\Category();
 		$allCategories = $categories->find();
