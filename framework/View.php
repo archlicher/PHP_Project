@@ -45,7 +45,6 @@ class View {
 		if (is_array($data)) {
 			$this->___data = array_merge($this->___data, $data);
 		}
-
 		if (count($this->___layoutParts)>0) {
 			foreach ($this->___layoutParts as $key => $value) {
 				$r = $this->includeFile($value);

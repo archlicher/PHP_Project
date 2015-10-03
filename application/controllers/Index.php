@@ -2,14 +2,13 @@
 
 namespace Controllers;
 
-class Index extends \Framework\DefaultController {
-	
+class Index extends Base {
+
 	public function index() {
-/*		$val = new \AR\Validation();
-		$val->setRule()->setRule();
-		$val->validate();
-*/
+		$categories = new \Models\Category();
+		$allCategories = $categories->find();
+
 		$this->view->appendToLayout('body', 'index');
-		$this->view->display('layouts.default');
+		$this->view->display('layouts.default', $allCategories);
 	}
 }

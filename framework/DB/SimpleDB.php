@@ -48,9 +48,6 @@ class SimpleDB {
 		if ($params) {
 			$this->params = $params;
 		}
-		/*if ($this->logSql) {
-			\AR\Logger::getInstance()->set($this->sql.' '.print_r($this->params, true), 'db');
-		}*/
 		$this->stmt->execute($this->params);
 		return $this;
 	}

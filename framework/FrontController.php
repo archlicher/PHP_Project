@@ -43,7 +43,7 @@ class FrontController {
 		} else {
 			throw new \Exception("No routes.", 500);
 		}
-
+		
 		if ($this->ns == null && $routes['*']['namespace']) {
 			$this->ns = $routes['*']['namespace'];
 			$rc = $routes['*'];
@@ -66,6 +66,7 @@ class FrontController {
 			$this->controller = $this->getDefaultController();
 			$this->method = $this->getDefaultMethod();
 		}
+
 		if (is_array($rc) && $rc['controllers']) {
 			if ($rc['controllers'][$this->controller]['methods'][$this->method]) {
 				$this->method = strtolower($rc['controllers'][$this->controller]['methods'][$this->method]);
@@ -74,6 +75,7 @@ class FrontController {
 				$this->controller=strtolower($rc['controllers'][$this->controller]['to']);
 			}
 		}
+
 		$input->setPost($this->router->getPost());
 
 		$controllerClass = $this->ns.'\\'.ucfirst($this->controller);
