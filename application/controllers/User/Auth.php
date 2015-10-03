@@ -51,6 +51,7 @@ class Auth extends \Controllers\Base {
 			$newUser['username'] = $cleaner->normalize($username, 'xss|string');
 			$newUser['password'] = $cleaner->normalize($password, 'xss|string');
 			$newUser['email'] = $cleaner->normalize($email, 'xss|string');
+			
 			$userDb = new \Models\User();
 			$user = $userDb->add($newUser);
 

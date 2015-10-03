@@ -4,13 +4,9 @@
 			<ul class="nav nav-sidebar"> Categories
 			<?php
 				$categories = $this->___data[0];
-				foreach ($categories as $key => $value) {
-					foreach ($value as $k => $v) { 
-						if ($k == 'category_id') continue;?>
-						<li class="active"><a href="products\category\<?=$v;?>"><?=$v;?></a></li>
-					<?php }
-				}
-			?>
+				foreach ($categories as $key => $value) {?>
+					<li class="active"><a href="/php_project/application/public/products/category/<?=$value['category_id'];?>"><?=$value['name'];?></a></li>
+			<?php } ?>
 			</ul>
 		</div>
 		<div class="col-lg-8 panel"> Products:

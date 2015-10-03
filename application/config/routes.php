@@ -21,5 +21,9 @@ $cnf['user']['controllers']['product']['to'] = 'product';
 $cnf['user']['controllers']['product']['methods']['new'] = 'new';
 $cnf['user']['controllers']['product']['methods']['edit'] = 'edit';
 
+$cnf['controllers']['products']['to'] = 'category';
+$cnf['controllers']['products']['methods'] = 'category';
+
+
 $cnf['*']['namespace'] = 'Controllers';
 return $cnf;

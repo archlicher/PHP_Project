@@ -13,19 +13,19 @@
 			<ul class="nav navbar-nav navbar-right">
 			<?php 
 			if (!empty($_SESSION['userId'])) {?>
-				<li><a href="profile">Profile</a></li>
-				<li><a href="orders">My cart</a></li>
-				<li><a href="products">My products</a></li>
+				<li><a href="/php_project/application/public/user/profile">Profile</a></li>
+				<li><a href="/php_project/application/public/user/orders">My cart</a></li>
+				<li><a href="/php_project/application/public/user/products">My products</a></li>
 				<?php if($_SESSION['editor']) {?>
-				<li><a href="edit">Editor</a></li>
+				<li><a href="/php_project/application/public/editor/edit">Editor</a></li>
 				<?php } 
 				if($_SESSION['admin']) {?>
-				<li><a href="modify">Admin</a></li>
+				<li><a href="/php_project/application/public/admin/modify">Admin</a></li>
 				<?php } ?>
-				<li><a href="auth/logout">Logout</a></li>
+				<li><a href="/php_project/application/public/user/auth/logout">Logout</a></li>
 			<?php } else { ?>
-				<li><a href="user/auth/login">Login</a></li>
-				<li><a href="user/auth/register">Register</a></li>
+				<li><a href="/php_project/application/public/user/auth/login">Login</a></li>
+				<li><a href="/php_project/application/public/user/auth/register">Register</a></li>
 			<?php } ?>
 			</ul>
 		</div>
