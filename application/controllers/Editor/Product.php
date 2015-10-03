@@ -9,8 +9,11 @@ class Product extends \Controllers\Base {
 			header('Location: /php_project/application/public/');
 			exit;
 		}
+		
+		$productDb = new \Models\Product();
+		$product_id = $this->input->get(0);
 
-		if (isset($_POST)) {
+		if (isset($_POST['submit'])) {
 			$updateProduct = array();
 
 			$cleaner = new \Framework\Common();
@@ -41,8 +44,6 @@ class Product extends \Controllers\Base {
 			header('Location: /php_project/application/public/');
 		}
 
-		$product_id = $this->input->get(0);
-		$productDb = new \Models\Product();
 		$product = $productDb->get('product_id='.$product_id)[0];
 
 		if (!is_numeric($product_id) || !$product) {
