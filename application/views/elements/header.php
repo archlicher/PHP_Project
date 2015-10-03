@@ -22,10 +22,10 @@
 				if($_SESSION['admin']) {?>
 				<li><a href="modify">Admin</a></li>
 				<?php } ?>
-				<li><a href="login/logout">Logout</a></li>
+				<li><a href="auth/logout">Logout</a></li>
 			<?php } else { ?>
-				<li><a href="user/login/login">Login</a></li>
-				<li><a href="user/register/register">Register</a></li>
+				<li><a href="user/auth/login">Login</a></li>
+				<li><a href="user/auth/register">Register</a></li>
 			<?php } ?>
 			</ul>
 		</div>

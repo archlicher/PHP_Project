@@ -31,16 +31,18 @@ class Base {
 		foreach ($element as $key => $value) {
 			$values[] = $value;
 		}
-		$keys = implode($keys, ',');
+		$keys = implode($keys, ', ');
 		$numOfValues = count($values);
-		$query = "INSERT INTO {$this->table}($keys) VALUES(";
+		$query = "INSERT INTO {$this->table} ($keys) VALUES (";
 		for ($i=0; $i < $numOfValues; $i++) { 
 			$query .= "?";
 			if ($i!=$numOfValues-1) {
 				$query .= ", ";
 			}
 		}
-		$result = $this->db->prepare($query, $values)->execute()->fetchAllNum();
+		$query .= ')';
+		var_dump($query);
+		$result = $this->db->prepare($query, $values)->execute()->getLastInsertId();
 
 		return $result;
 	}
