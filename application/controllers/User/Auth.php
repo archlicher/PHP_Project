@@ -10,8 +10,8 @@ class Auth extends \Controllers\Base {
 			$username = $_POST['username'];
 			$password = $_POST['password'];
 			$cleaner = new \Framework\Common();
-			$username = $cleaner->normalize($username, 'xss|string');
-			$password = $cleaner->normalize($password, 'xss|string');
+			$username = $cleaner->normalize($username, 'trim|xss|string');
+			$password = $cleaner->normalize($password, 'trim|xss|string');
 
 			$userDb = new \Models\User();
 			$user = $userDb->getUser($username)[0];
@@ -48,9 +48,9 @@ class Auth extends \Controllers\Base {
 			}
 
 			$cleaner = new \Framework\Common();
-			$newUser['username'] = $cleaner->normalize($username, 'xss|string');
-			$newUser['password'] = $cleaner->normalize($password, 'xss|string');
-			$newUser['email'] = $cleaner->normalize($email, 'xss|string');
+			$newUser['username'] = $cleaner->normalize($username, 'trim|xss|string');
+			$newUser['password'] = $cleaner->normalize($password, 'trim|xss|string');
+			$newUser['email'] = $cleaner->normalize($email, 'trim|xss|string');
 			
 			$userDb = new \Models\User();
 			$user = $userDb->add($newUser);
@@ -60,7 +60,6 @@ class Auth extends \Controllers\Base {
 			} else {
 				$this->login();
 			}
-
 		}
 
 		$this->view->appendToLayout('body', 'register');

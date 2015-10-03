@@ -4,7 +4,10 @@ namespace Controllers\User;
 
 class Index extends \Controllers\Base {
 
-	public function index() {
+	public function index() {		
+		if (!isset($_SESSION['userId'])) {
+			header('Location: /php_project/application/public/');
+		}
 		$categories = new \Models\Category();
 		$allCategories = $categories->find();
 		$products = new \Models\Product();

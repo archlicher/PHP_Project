@@ -33,7 +33,7 @@
 						<td><?= $value['price'];?></td>
 						<td><?= $value['promotion'] != null ? $value['promotion'] : "no promo";?></td>
 						<?php if (isset($_SESSION['userId'])) { ?>
-						<td><a class="btn" href="/php_project/application/public/user/order/<?=$value['product_id'];?>">Buy</a></td>
+						<td><a class="btn" href="/php_project/application/public/user/product/buy/<?=$value['product_id'];?>">Buy</a></td>
 						<?php }?>
 					</tr>
 			<?php }

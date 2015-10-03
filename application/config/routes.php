@@ -17,9 +17,11 @@ $cnf['user']['controllers']['auth']['methods']['logout'] = 'logout';
 $cnf['user']['controllers']['profile']['to'] = 'profile';
 $cnf['user']['controllers']['profile']['methods']['index'] = 'index';
 $cnf['user']['controllers']['profile']['methods']['edit'] = 'edit';
+$cnf['user']['controllers']['profile']['methods']['cash'] = 'cash';
+
 $cnf['user']['controllers']['product']['to'] = 'product';
-$cnf['user']['controllers']['product']['methods']['new'] = 'new';
-$cnf['user']['controllers']['product']['methods']['edit'] = 'edit';
+$cnf['user']['controllers']['product']['methods']['buy'] = 'buy';
+$cnf['user']['controllers']['product']['methods']['sell'] = 'sell';
 
 $cnf['controllers']['products']['to'] = 'category';
 $cnf['controllers']['products']['methods'] = 'category';

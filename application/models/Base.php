@@ -47,27 +47,28 @@ class Base {
 		return $result;
 	}
 
-	public function update($element) {
-		if (!isset($element['id'])) die('Wrong model set.');
+	public function update($class, $element) {
+		$id = $class.'_id';
+		if (!isset($element[$id]));
 
 		$query = "UPDATE {$this->table} SET";
 		$values = array();
 		foreach ($element as $key => $value) {
-			if ($key === 'id') continue;
+			if ($key === $id) continue;
 			$values[] = $value;
-			$query .= "$key = ? ,";
+			$query .= " $key = ? ,";
 		}
 
 		$query = rtrim($query, ',');
+		$query .= "WHERE {$id} = {$element[$id]}";
 
-		$query .= "WHERE id = {$element['id']}";
-		$result = $this->db->prepare($query, $values)->execute()->fetchAllNum();
+		$result = $this->db->prepare($query, $values)->execute()->getAffectedRows();
 
 		return $result;
 	}
 
 	public function get($id) {
-		return $this->find(array('where' => 'id = '.$id ));
+		return $this->find(array('where' => $id ));
 	}
 
 	public function find($args = array()) {
