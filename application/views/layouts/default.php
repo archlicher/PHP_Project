@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../public/css/bootstrap-3.3.4-dist/css/bootstrap.css">
-	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<title>The shopping Cart</title>
 </head>
 <body>
 	<header>
 		<?php include_once '../views/elements/header.php'; ?>
 	</header>
 	<?= $this->getLayoutData('body');?>
-	<footer>
-		<?php include_once '../views//elements/footer.php'; ?>
-	</footer>
 </body>
 </html>

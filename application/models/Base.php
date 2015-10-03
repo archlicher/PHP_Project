@@ -68,10 +68,6 @@ class Base {
 		return $this->find(array('where' => 'id = '.$id ));
 	}
 
-	public function get_by_name($name) {
-		return $this->find(array('where' => "name = '" .$name."'" ));
-	}
-
 	public function find($args = array()) {
 		$defaults = array(
 			'table' => $this->table,
@@ -79,7 +75,6 @@ class Base {
 			'where' => '',
 			'columns' => '*'
 		);
-
 		$args = array_merge($defaults, $args);
 
 		extract($args);
