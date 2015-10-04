@@ -1,7 +1,7 @@
 <div id="wrapper">
 	<div class="container-fluid">
 		<div class="col-sm-3 col-md-2 sidebar">
-			<ul class="nav nav-sidebar"> Categories
+			<ul class="nav nav-sidebar"><strong style="font-size:150%;">Categories</strong>
 			<?php
 				$categories = $this->___data[0];
 				foreach ($categories as $key => $value) {?>
@@ -9,7 +9,7 @@
 			<?php } ?>
 			</ul>
 		</div>
-		<div class="col-lg-8 panel"> Products:
+		<div class="col-lg-8 panel"><strong style="font-size:150%;">Products:</strong>
 			<table class="table">
 				<tr>
 					<th>Id</th>

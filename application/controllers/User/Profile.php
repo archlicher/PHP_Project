@@ -35,17 +35,20 @@ class Profile extends \Controllers\Base {
 			$this->getUser();
 		}
 
-		if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['email'])) {
+		$cleaner = new \Framework\Common();
+
+		if (isset($_POST['email']) || isset($_POST['password']) || isset($_POST['confirmPassword']) || isset($_POST['email'])) {
 			$password = $_POST['password'];
 			$cPassword = $_POST['confirmPassword'];
 			$email = $_POST['email'];
-			if ($password != $cPassword) {
+			
+			if (isset($_POST['password']) && isset($_POST['confirmPassword']) && $password != $cPassword) {
 				header('Location: /php_project/application/public/user/profile');
 				exit;
+			} else if (isset($_POST['password']) && isset($_POST['confirmPassword']) && $password == $cPassword) {
+				$editUser['password'] = $cleaner->normalize($password, 'trim|xss|string');
 			}
 
-			$cleaner = new \Framework\Common();
-			$editUser['password'] = $cleaner->normalize($password, 'trim|xss|string');
 			$editUser['email'] = $cleaner->normalize($email, 'trim|xss|string');
 			$editUser['user_id'] = $_SESSION['userId'];
 

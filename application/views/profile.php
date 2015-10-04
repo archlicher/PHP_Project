@@ -4,7 +4,7 @@ $products = $this->___data[1];
 ?>
 <div id="wrapper">
 	<div class="container-fluid">
-		<div class="col-sm-3 col-md-2 sidebar panel">User info:
+		<div class="col-sm-3 col-md-2 sidebar panel"><strong style="font-size:150%;">User info:</strong>
 			<table class="nav nav-sidebar table">
 				<tr>
 					<th>Username:</td>
@@ -27,7 +27,7 @@ $products = $this->___data[1];
 			</table>
 		</div>
 		<?php if (count($products)>0) {?>
-		<div class="col-lg-8 panel"> Products:
+		<div class="col-lg-8 panel"><strong style="font-size:150%;">Products:</strong>
 			<table class="table">
 				<tr>
 					<th>Id</th>

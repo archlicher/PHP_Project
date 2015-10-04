@@ -15,11 +15,11 @@
 			if (!empty($_SESSION['userId'])) {?>
 				<li><a href="/php_project/application/public/user/profile">Profile</a></li>
 				<li><a href="/php_project/application/public/user/product/cart">My cart</a></li>
-				<?php if($_SESSION['editor']) {?>
+				<?php if($_SESSION['editor'] || $_SESSION['admin']) {?>
 				<li><a href="/php_project/application/public/editor/index">Editor</a></li>
 				<?php } 
 				if($_SESSION['admin']) {?>
-				<li><a href="/php_project/application/public/admin/modify">Admin</a></li>
+				<li><a href="/php_project/application/public/admin/index">Admin</a></li>
 				<?php } ?>
 				<li><a href="/php_project/application/public/user/auth/logout">Logout</a></li>
 			<?php } else { ?>

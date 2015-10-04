@@ -2,8 +2,15 @@
 $cnf['admin']['namespace'] = 'Controllers\Admin';
 $cnf['admin']['controllers']['index']['to'] = 'index';
 $cnf['admin']['controllers']['index']['methods']['index'] = 'index';
-$cnf['admin']['controllers']['user']['to'] = 'index';
-$cnf['admin']['controllers']['user']['methods']['index'] = 'index';
+$cnf['admin']['controllers']['user']['to'] = 'user';
+$cnf['admin']['controllers']['user']['methods']['edit'] = 'edit';
+$cnf['admin']['controllers']['user']['methods']['remove'] = 'remove';
+$cnf['admin']['controllers']['category']['to'] = 'category';
+$cnf['admin']['controllers']['category']['methods']['remove'] = 'remove';
+$cnf['admin']['controllers']['promotion']['to'] = 'promotion';
+$cnf['admin']['controllers']['promotion']['methods']['remove'] = 'remove';
+$cnf['admin']['controllers']['product']['to'] = 'product';
+$cnf['admin']['controllers']['product']['methods']['remove'] = 'remove';
 
 $cnf['user']['namespace'] = 'Controllers\User';
 $cnf['user']['controllers']['index']['to'] = 'index';
