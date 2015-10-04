@@ -18,11 +18,11 @@ $promos = $this->___data[2];
 					<tr>
 						<td><?= $value['category_id'];?></td>
 						<td><?= $value['name'];?></td>
-						<td><?= $value['deleted'];?></td>
+						<td><?= $value['deleted'] == 0 ? "no":"yes";?></td>
 						<td>
 							<a class="btn" href="/php_project/application/public/editor/category/edit/<?= $value['category_id'];?>">Edit</a>
 						<?php if ($_SESSION['admin']==true) {?>
-							<a class="btn" href="/php_project/application/public/admin/category/remove/<?= $value['category_id'];?>">Edit</a>
+							<a class="btn" href="/php_project/application/public/admin/category/remove/<?= $value['category_id'];?>">Remove</a>
 						<?php } ?>
 						</td>
 					</tr>
