@@ -28,10 +28,10 @@
 					<tr>
 						<td><?= $value['product_id'];?></td>
 						<td><?= $value['name'];?></td>
-						<td><?= $value['description'];?></td>
+						<td><?= $value['desciption'];?></td>
 						<td><?= $value['quantity'];?></td>
 						<td><?= $value['price'];?></td>
-						<td><?= $value['promotion'] != null ? $value['promotion'] : "no promo";?></td>
+						<td><?= $value['promotion_id'] != null ? "-".$value['discount']."%" : "no promo";?></td>
 						<?php if (isset($_SESSION['userId'])) { ?>
 						<td><a class="btn" href="/php_project/application/public/user/product/buy/<?=$value['product_id'];?>">Buy</a></td>
 						<?php }?>

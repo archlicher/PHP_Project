@@ -23,8 +23,17 @@ class Product extends \Controllers\Base {
 		}
 
 		$this->getUser();
+		
+		$price = $product['price'];
+		if ($product['promotion_id'] !=null) {
+			$promoDb = new \Models\Promotion();
+			$discount = $promoDb->get('promotion_id = '.$product['promotion_id'])[0]['discount'];
+			if ($discount>0) {
+				$price = $price - $price*$discount/100;
+			}
+		}
 
-		if ($this->user['cash'] < $product['price']) {
+		if ($this->user['cash'] < $price) {
 			header('Location: /php_project/application/public/');
 			exit;
 		}
@@ -36,7 +45,7 @@ class Product extends \Controllers\Base {
 		$newOrder['product_id'] = $product_id;
 		$orderId = $orderDb->add($newOrder);
 
-		$this->userDb->update('user', array('user_id' => $_SESSION['userId'], 'cash' => $this->user['cash']-$product['price']));
+		$this->userDb->update('user', array('user_id' => $_SESSION['userId'], 'cash' => $this->user['cash']-$price));
 
 		$buyProduct = array();
 		$buyProduct['product_id'] = $product_id;

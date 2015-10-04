@@ -12,7 +12,7 @@ class Index extends \Controllers\Base {
 		$categories = new \Models\Category();
 		$allCategories = $categories->find();
 		$products = new \Models\Product();
-		$allProducts = $products->find(array('where'=>'quantity > "0"'));
+		$allProducts = $products->getProductsWithDiscount();
 		$data = array();
 		$data[] = $allCategories;
 		$data[] = $allProducts;

@@ -5,7 +5,7 @@ $products = $this->___data[1];
 <div id="wrapper">
 	<div class="container-fluid">
 	<?php if (count($categories)>0) {?>
-		<div class="col-lg-8 panel"> Products:
+		<div class="col-lg-3 panel"> Categories:
 			<table class="table">
 				<tr>
 					<th>Id</th>

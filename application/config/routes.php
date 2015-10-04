@@ -33,6 +33,9 @@ $cnf['editor']['controllers']['product']['methods']['edit'] = 'edit';
 $cnf['editor']['controllers']['product']['methods']['promo'] = 'promo';
 $cnf['editor']['controllers']['category']['to'] = 'category';
 $cnf['editor']['controllers']['category']['methods']['edit'] = 'edit';
+$cnf['editor']['controllers']['promotion']['to'] = 'promotion';
+$cnf['editor']['controllers']['promotion']['methods']['edit'] = 'edit';
+$cnf['editor']['controllers']['promotion']['methods']['add'] = 'add';
 
 $cnf['controllers']['products']['to'] = 'category';
 $cnf['controllers']['products']['methods'] = 'category';

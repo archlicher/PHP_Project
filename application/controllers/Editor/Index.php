@@ -5,7 +5,7 @@ namespace Controllers\Editor;
 class Index extends \Controllers\Base {
 	
 	public function index()	{
-		if(!isset($_SESSION['userId']) || $_SESSION['editor']!=true) {
+		if(!isset($_SESSION['userId']) && $_SESSION['editor']!=true &&  $_SESSION['admin']!=true) {
 			header('Location: /php_project/application/public/');
 			exit;
 		}

@@ -8,6 +8,11 @@ class Product extends \Models\Base {
 		parent::__construct(array('table'=>'products'));
 	}
 
+	public function getProductsWithDiscount() {
+		$query = "SELECT *, pr.discount as 'discount' FROM {$this->table} p LEFT JOIN promotions pr ON pr.promotion_id = p.promotion_id WHERE p.quantity > 0";
+		return $this->db->prepare($query)->execute()->fetchAllAssoc();
+	}
+
 	public function getByCategory($id) {
 		$query = "SELECT * FROM {$this->table} p JOIN products_categories pc ON pc.product_id = p.product_id WHERE pc.category_id = ? AND quantity > 0";
 		$this->db->prepare($query, array($id));

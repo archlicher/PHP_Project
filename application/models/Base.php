@@ -63,7 +63,7 @@ class Base {
 
 		$query = rtrim($query, ',');
 		$query .= "WHERE {$id} = {$element[$id]}";
-
+		
 		$result = $this->db->prepare($query, $values)->execute()->getAffectedRows();
 
 		return $result;
