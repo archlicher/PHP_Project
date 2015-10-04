@@ -10,6 +10,7 @@ $promos = $this->___data[2];
 				<tr>
 					<th>Id</th>
 					<th>Name</th>
+					<th>Removed</th>
 					<th>Action</th>
 				</tr>
 			<?php
@@ -17,8 +18,12 @@ $promos = $this->___data[2];
 					<tr>
 						<td><?= $value['category_id'];?></td>
 						<td><?= $value['name'];?></td>
+						<td><?= $value['deleted'];?></td>
 						<td>
 							<a class="btn" href="/php_project/application/public/editor/category/edit/<?= $value['category_id'];?>">Edit</a>
+						<?php if ($_SESSION['admin']==true) {?>
+							<a class="btn" href="/php_project/application/public/admin/category/remove/<?= $value['category_id'];?>">Edit</a>
+						<?php } ?>
 						</td>
 					</tr>
 			<?php } ?>
@@ -33,6 +38,7 @@ $promos = $this->___data[2];
 					<th>Id</th>
 					<th>Name</th>
 					<th>Discount</th>
+					<th>Removed</th>
 					<th>Action</th>
 				</tr>
 			<?php
@@ -41,6 +47,7 @@ $promos = $this->___data[2];
 						<td><?= $value['promotion_id'];?></td>
 						<td><?= $value['promotion_name'];?></td>
 						<td>-<?= $value['discount'];?>%</td>
+						<td><?= $value['deleted'];?></td>
 						<td>
 							<a class="btn" href="/php_project/application/public/editor/promotion/edit/<?= $value['promotion_id'];?>">Edit</a>
 						<?php if ($_SESSION['admin']==true) {?>
@@ -59,6 +66,7 @@ $promos = $this->___data[2];
 					<th>Description</th>
 					<th>Price</th>
 					<th>Promotion</th>
+					<th>Removed</th>
 					<th>Action</th>
 				</tr>
 			<?php
@@ -69,6 +77,7 @@ $promos = $this->___data[2];
 						<td><?= $value['description'];?></td>
 						<td><?= $value['price'];?></td>
 						<td><?= $value['promotion_id'] != null ? $value['promotion_id'] : "no promo";?></td>
+						<td><?= $value['deleted'];?></td>
 						<td>
 							<a class="btn" href="/php_project/application/public/editor/product/edit/<?= $value['product_id'];?>">Edit</a>
 							<a class="btn" href="/php_project/application/public/editor/product/promo/<?= $value['product_id'];?>">Add promotion</a>
