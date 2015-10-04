@@ -80,8 +80,17 @@ class Product extends \Controllers\Base {
 		if ($this->user==null) {
 			$this->getUser();
 		}
+		
+		$price = $product['price'];
+		if ($product['promotion_id'] !=null) {
+			$promoDb = new \Models\Promotion();
+			$discount = $promoDb->get('promotion_id = '.$product['promotion_id'])[0]['discount'];
+			if ($discount>0) {
+				$price = $price - $price*$discount/100;
+			}
+		}
 
-		$this->userDb->update('user', array('user_id' => $_SESSION['userId'], 'cash' => $this->user['cash']+$product['price']));
+		$this->userDb->update('user', array('user_id' => $_SESSION['userId'], 'cash' => $this->user['cash']+$price));
 
 		$sellProduct['product_id'] = $product_id;
 		$sellProduct['quantity'] = $product['quantity']+1;
